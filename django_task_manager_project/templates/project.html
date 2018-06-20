@@ -1,0 +1,24 @@
+<div style="padding: 5px; border: solid 2px; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;">
+    project name: {{ project.title }}
+    <br>
+    owner: {{ project.user.username }}
+    <br>
+    <a class="button" href="{% url 'task_manager:member_add' project.id %}">Add Member</a><br>
+    members:
+    <br>
+    {% for member in project.memberships.all %}
+        {{ member.user.username }}
+        <br>
+    {% endfor %}
+
+    <a class="button" href="{% url 'task_manager:task_add' project.id %}">Add Task</a><br>
+    tasks:
+    <br>
+    {% for task in project.tasks.all %}
+        {% include 'task.html' with task=task %}
+        <br>
+    {% endfor %}
+    <br>
+
+</div>
+

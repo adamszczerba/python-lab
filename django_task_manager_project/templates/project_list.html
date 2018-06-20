@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <a class="button" href="{% url 'task_manager:project_add' %}">New project</a><br><br>
+
+    {% if projects.exists %}
+
+        {% for project in projects %}
+            {% include 'project.html' with project=project %}
+            <br>
+        {% endfor %}
+
+    {% else %}
+        No projects available
+    {% endif %}
+
+
+{% endblock %}
+

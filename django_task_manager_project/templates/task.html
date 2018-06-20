@@ -1,0 +1,25 @@
+{% block content %}
+
+    {% autoescape on %}
+
+        {{ task | linebreaks }}
+
+    {% endautoescape %}
+
+    {% if not task.finished %}
+
+        <form method="POST" action="{% url 'task_manager:task_set_finished' pk=task.pk %}">
+            {% csrf_token %}
+            <button type="submit">Done!</button>
+        </form>
+    {% else %}
+
+        <form method="POST" action="{% url 'task_manager:task_remove' pk=task.pk %}">
+            {% csrf_token %}
+            <button type="submit">Remove task</button>
+        </form>
+
+    {% endif %}
+
+
+{% endblock %}
